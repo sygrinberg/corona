@@ -10,8 +10,8 @@ const alerts = [
 
 const useStyles = makeStyles(theme => ({
     paper: {
-        flex: 0.33,
-        width: '100%'
+        // flex: 0.33,
+        width: '33%'
     },
     canvas: {
         height: "calc('100%')",
