@@ -7,6 +7,7 @@ const useStyles = makeStyles(theme => ({
     dashboard: {
       display: 'flex',
       flexDirection: 'column',
+      height: '100%',
       width: '100%',
       padding: '10px'
     }
@@ -15,11 +16,9 @@ const useStyles = makeStyles(theme => ({
 export default props => {
     const classes = useStyles();
     return (
-        <div>
-            <div className={classes.dashboard}>
-                <DashboardUpperRow />
-                <DashboardLowerRow />
-            </div>
+        <div className={classes.dashboard}>
+            <DashboardUpperRow />
+            <DashboardLowerRow />
         </div>
     );
 }

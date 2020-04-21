@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from 'react';
-import Chart from 'chart.js';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -7,56 +6,22 @@ const useStyles = makeStyles(theme => ({
     paper: {
         height: "100%",
         width: '50%',
-        // margin: '5px',
         padding: props => props.padding,
     },
-    canvas: {
-        height: "100%",
-        width: "100%"
+    graphContainer: {
+        // height: "100%",
+        // width: "100%"
     }
   }));
 
 export default ({ height, padding }) => {
     const classes = useStyles({ height, padding });
-    const canvsdEl = useRef();
-    
-    const [state, setState] = useState(0);
-    useEffect(() => {
-        window.addEventListener('resize', () => {
-            setState(state + 1);
-        });
-
-        const ctx = canvsdEl.current.getContext('2d');
-        const chart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['Label 1','Label 2','Label 3','Label 4','Label 5','Label 6','Label 7','Label 8','Label 9','Label 10'],
-                datasets: [
-                    {
-                        label: "Data1",
-                        borderColor: "#3e95cd",
-    
-                        data: [29, 49, 39, 49, 37, 57, 57, 45, 82, 34]
-                    },
-                    {
-                        label: "Data2",
-                        borderColor: "#c45850",
-                        data: [55, 57, 85, 72, 82, 75, 83, 222, 22, 67]
-                    },
-                    {
-    
-                        label: "Data3",
-                        borderColor: "#c45850",
-                        data: [964, 42, 12, 67, 97, 23, 61, 45, 60, 80]
-                    }
-                ]
-            }
-        });
-    }, [canvsdEl])
 
     return (
         <Paper className={classes.paper}>
-            <canvas className={classes.canvas} ref={canvsdEl} />
+            <div className={classes.graphContainer}>
+                {/* <iframe src="https://7b5819088c6d4b77ae159891ea10c118.europe-west3.gcp.cloud.es.io:9243/app/kibana#/visualize/edit/49dfbe40-834a-11ea-aa91-b307cde3c7dc?embed=true&_g=(refreshInterval:(pause:!t,value:0),time:(from:now-1y,to:now))&_a=(filters:!(),linked:!f,query:(language:kuery,query:''),uiState:(vis:(colors:('diagnosed%20:false%20':%23508642,'diagnosed%20:true%20':%23E5AC0E))),vis:(aggs:!((enabled:!t,id:'1',params:(),schema:metric,type:count),(enabled:!t,id:'2',params:(extended_bounds:(max:'',min:''),field:age,has_extended_bounds:!f,interval:1,min_doc_count:!f),schema:segment,type:histogram),(enabled:!t,id:'3',params:(filters:!((input:(language:kuery,query:'diagnosed%20:true%20and%20health_staff_admisition%20:%20true%20'),label:''),(input:(language:kuery,query:'diagnosed%20:true'),label:''),(input:(language:kuery,query:'diagnosed%20:false%20'),label:''))),schema:group,type:filters)),params:(addLegend:!t,addTimeMarker:!f,addTooltip:!t,categoryAxes:!((id:CategoryAxis-1,labels:(filter:!t,show:!t,truncate:100),position:bottom,scale:(type:linear),show:!t,style:(),title:(),type:category)),dimensions:(series:!((accessor:1,aggType:filters,format:(),label:filters,params:())),x:(accessor:0,aggType:histogram,format:(id:number,params:(parsedUrl:(basePath:'',origin:'https:%2F%2F7b5819088c6d4b77ae159891ea10c118.europe-west3.gcp.cloud.es.io:9243',pathname:%2Fapp%2Fkibana))),label:age,params:(interval:2)),y:!((accessor:2,aggType:count,format:(id:number),label:Count,params:()))),grid:(categoryLines:!f),labels:(),legendPosition:right,seriesParams:!((data:(id:'1',label:Count),drawLinesBetweenPoints:!t,interpolate:linear,lineWidth:2,mode:stacked,show:!t,showCircles:!t,type:area,valueAxis:ValueAxis-1)),thresholdLine:(color:%23E7664C,show:!f,style:full,value:10,width:1),times:!(),type:area,valueAxes:!((id:ValueAxis-1,labels:(filter:!f,rotate:0,show:!t,truncate:100),name:LeftAxis-1,position:left,scale:(mode:normal,type:linear),show:!t,style:(),title:(text:Count),type:value))),title:diagnosed_hist,type:area))" height="600" width="800"></iframe> */}
+            </div>
         </Paper>
     );
 }

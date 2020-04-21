@@ -13,10 +13,6 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 
 const useStyles = makeStyles((theme, props) => {
-    console.log('theme');
-    console.log(theme);
-    console.log('props');
-    console.log(props);
     return ({
         dashboardController: {
             width: '16%',

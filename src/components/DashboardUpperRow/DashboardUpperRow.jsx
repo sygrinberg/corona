@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
     dashboardUpperRow: {
       display: 'flex',
     //   justifyContent: 'space-between',
-      height: '100%',
+      height: '55%',
       width: '100%',
       '& :not(:last-child)': {
           marginRight: '10px'

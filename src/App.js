@@ -12,6 +12,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 const useStyles = makeStyles(theme => ({
   root: {
     // display: 'flex'
+    height: '100%'
   },
   tabs: {
     backgroundColor: '#000000',
@@ -22,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 
 function App() {
   const classes = useStyles();
-  const value = 1;
+  const value = 0;
 
   return (
     <div className={classes.root}>

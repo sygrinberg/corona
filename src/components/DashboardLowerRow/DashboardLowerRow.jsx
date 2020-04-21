@@ -1,14 +1,16 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import LeftGraph from './LeftGraph';
-import MiddleGraph from './MiddleGraph';
-import RightGraph from './RightGraph';
+import Graph1 from './Graph1';
+import Graph2 from './Graph2';
+import Graph3 from './Graph3';
+import Graph4 from './Graph4';
+// import MiddlGraph from './MiddleGraph';
+// import RightGraph from './RightGraph';
 
 const useStyles = makeStyles(theme => ({
     dashboardLowerRow: {
-      display: 'flex',
-    //   justifyContent: 'space-between',
-      height: '100%',
+    display: 'flex',
+    height: '35%',
       width: '100%',
       marginTop: '10px',
       '& :not(:last-child)': {
@@ -24,9 +26,10 @@ export default props => {
     const classes = useStyles();
     return (
         <div className={classes.dashboardLowerRow}>
-            <LeftGraph />
-            <MiddleGraph />
-            <RightGraph />
+            <Graph1 />
+            <Graph2 />
+            <Graph3 />
+            <Graph4 />
         </div>
     );
 }
