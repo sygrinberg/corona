@@ -8,6 +8,9 @@ const alerts = [
 ];
 
 const useStyles = makeStyles(theme => ({
+    alertBox: {
+        backgroundColor: '#dbdada'
+    },
     alertTitle: {
         textDecoration: 'underline',
         fontWeight: 'bold'
@@ -20,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 export default props => {
     const classes = useStyles();
     return (
-        <Alert severity="error">
+        <Alert className={classes.alertBox} severity="error">
             <AlertTitle className={classes.alertTitle}>SYSTEM ALERT</AlertTitle>
             <ul className={classes.alertList}>
                 {alerts.map(alert => (

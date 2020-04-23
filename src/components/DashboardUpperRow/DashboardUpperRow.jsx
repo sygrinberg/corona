@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
     //   justifyContent: 'space-between',
       height: '55%',
       width: '100%',
-      '& :not(:last-child)': {
+      '& > :not(:last-child)': {
           marginRight: '10px'
       }
     },

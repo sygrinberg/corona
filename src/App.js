@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   tabs: {
     backgroundColor: '#000000',
     display: 'flex',
-    padding: '10px'
+    padding: '10px 10px 10px 20px'
   }
 }));
 
@@ -38,11 +38,13 @@ function App() {
                   data
               </span>
             </div>
-            <Tab label="Outbrakes" value={0}/>
-            <Tab label="Hospitals" value={1} />
-            <Tab label="First Response" value={2} />
-            <Tab label="Tests" value={3} />
-            <Tab label="Enforcements" value={4} />
+            <Tab label="Current Outbreak" value={0}/>
+            <Tab label="Forcast Outbreak" value={1}/>
+            <Tab label="Diagnosed only" value={2}/>
+            <Tab label="Hospitals" value={3} />
+            <Tab label="First Response" value={4} />
+            <Tab label="Tests" value={5} />
+            <Tab label="Enforcements" value={6} />
           </Tabs>
       </AppBar>
       <Dashboard />
