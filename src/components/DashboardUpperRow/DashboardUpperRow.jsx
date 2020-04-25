@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import DashboardController from './DashboardController';
-import UpperGraph from './UpperGraph';
+import HeatMap from './HeatMap';
 import GaugeSection from './GaugeSection';
 import AlertSection from './AlertSection';
 
@@ -31,7 +31,7 @@ export default props => {
     return (
         <div className={classes.dashboardUpperRow}>
             <DashboardController height={height} padding={padding}/>
-            <UpperGraph height={height} padding={padding}/>
+            <HeatMap height={height} padding={padding}/>
             <div className={classes.alertsSection}>
                 <AlertSection />
                 <GaugeSection />

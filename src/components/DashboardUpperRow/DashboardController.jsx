@@ -15,7 +15,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 const useStyles = makeStyles((theme, props) => {
     return ({
         dashboardController: {
-            width: '16%',
+            width: props => `${props.componentWidth}%`,
         },
         formControl: {
             minWidth: 140
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme, props) => {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
-            padding: props => props.padding,
+            padding: '20px',
         }
       });
 });
@@ -36,8 +36,8 @@ const createTime = value => {
     return `${Math.floor(value)}:${minutes || '00'}`
 }
 
-export default ({ height, padding }) => {
-    const classes = useStyles({ height, padding });
+export default ({ height, padding, componentWidth = 16 }) => {
+    const classes = useStyles({ height, padding, componentWidth });
 
     const [categoryState, setCategoryState] = useState('cat1');
     const [ageRangeState, setAgeRangeState] = useState([18, 40]);
@@ -66,9 +66,9 @@ export default ({ height, padding }) => {
                 <FormControl component="fieldset" className={classes.formControl}>
                     <FormLabel component="legend">Category</FormLabel>
                     <RadioGroup aria-label="category" name="category" value={categoryState} onChange={onCategoryChange}>
-                        <FormControlLabel value="cat1" control={<Radio />} label="Category 1" />
-                        <FormControlLabel value="cat2" control={<Radio />} label="Category 2" />
-                        <FormControlLabel value="cat3" control={<Radio />} label="Category 3" />
+                        <FormControlLabel value="cat1" control={<Radio />} label="Current Outbreak" />
+                        <FormControlLabel value="cat2" control={<Radio />} label="Forcast Outbreak" />
+                        <FormControlLabel value="cat3" control={<Radio />} label="Diagnosed only" />
                     </RadioGroup>
                 </FormControl>
                 <Typography id="discrete-slider-small-steps" gutterBottom>

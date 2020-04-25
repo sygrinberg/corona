@@ -7,6 +7,7 @@ const useStyles = makeStyles(theme => ({
     dashboard: {
       display: 'flex',
       flexDirection: 'column',
+      backgroundColor: '#dbdada',
       height: '100%',
       width: '100%',
       padding: '10px'

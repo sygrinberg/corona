@@ -9,14 +9,16 @@ const alerts = [
 
 const useStyles = makeStyles(theme => ({
     alertBox: {
-        backgroundColor: '#dbdada'
+    //   width: '100%'
     },
     alertTitle: {
         textDecoration: 'underline',
+        fontSize: '22px',
         fontWeight: 'bold'
     },
     alertList: {
-        padding: 0
+        padding: 0,
+        fontSize: '20px'
     }
   }));
 
