@@ -11,6 +11,8 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
 const useStyles = makeStyles((theme, props) => {
     return ({
@@ -20,12 +22,22 @@ const useStyles = makeStyles((theme, props) => {
         formControl: {
             minWidth: 140
         },
+        sliderContainer: {
+            display: 'flex',
+            justifyContent: 'space-between'
+            // marginBottom: '-10px'
+        },
+        // sliderTypography: {
+        //     marginBottom: '-10px'
+        // },
+        slider: {
+            width: '70%'
+        },
         paper: {
             // margin: '5px',
             height: '100%',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'space-between',
             padding: '20px',
         }
       });
@@ -42,6 +54,8 @@ export default ({ height, padding, componentWidth = 16 }) => {
     const [categoryState, setCategoryState] = useState('cat1');
     const [ageRangeState, setAgeRangeState] = useState([18, 40]);
     const [timeRangeState, setTimeRangeState] = useState([18, 40]);
+    const [feverStateRange, setFeverStateRange] = useState([35, 47]);
+    
     const [sicknessLevelState, setSicknessLevelState] = useState('');
 
     const onCategoryChange = useCallback((event => {
@@ -50,6 +64,10 @@ export default ({ height, padding, componentWidth = 16 }) => {
 
     const onAgeRangeChange = useCallback(((event, newValue) => {
         setAgeRangeState(newValue);
+    }), []);
+
+    const onFeverRangeChange = useCallback(((event, newValue) => {
+        setFeverStateRange(newValue);
     }), []);
 
     const onTimeRangeChange = useCallback(((event, newValue) => {
@@ -71,30 +89,52 @@ export default ({ height, padding, componentWidth = 16 }) => {
                         <FormControlLabel value="cat3" control={<Radio />} label="Diagnosed only" />
                     </RadioGroup>
                 </FormControl>
-                <Typography id="discrete-slider-small-steps" gutterBottom>
-                    Age
-                </Typography>
-                <Slider
-                    value={ageRangeState}
-                    min={1}
-                    max={100}
-                    onChange={onAgeRangeChange}
-                    valueLabelDisplay="auto"
-                    aria-labelledby="range-slider"
-                />
-                <Typography id="discrete-slider-small-steps" gutterBottom>
-                    Time
-                </Typography>
-                <Slider
-                    min={0}
-                    max={24}
-                    step={0.25}
-                    value={timeRangeState}
-                    valueLabelFormat={createTime}
-                    onChange={onTimeRangeChange}
-                    valueLabelDisplay="auto"
-                    aria-labelledby="range-slider"
-                />
+                <div className={classes.sliderContainer}>
+                    <Typography id="discrete-slider-small-steps" gutterBottom className={classes.sliderTypography}>
+                        Age
+                    </Typography>
+                    <Slider
+                        value={ageRangeState}
+                        min={1}
+                        max={100}
+                        className={classes.slider}
+                        onChange={onAgeRangeChange}
+                        valueLabelDisplay="auto"
+                        aria-labelledby="range-slider"
+                    />
+                </div>
+                <div className={classes.sliderContainer}>
+                    <Typography id="discrete-slider-small-steps" gutterBottom className={classes.sliderTypography}>
+                        Fever
+                    </Typography>
+                    <Slider
+                        value={feverStateRange}
+                        min={35}
+                        max={47}
+                        step={0.5}
+                        className={classes.slider}
+                        onChange={onFeverRangeChange}
+                        valueLabelDisplay="auto"
+                        aria-labelledby="range-slider"
+                    />
+                </div>
+                <div className={classes.sliderContainer}>
+                    <Typography id="discrete-slider-small-steps" gutterBottom className={classes.sliderTypography}>
+                        Time
+                    </Typography>
+                    <Slider
+                        min={0}
+                        max={24}
+                        step={0.25}
+                        value={timeRangeState}
+                        className={classes.slider}
+                        valueLabelFormat={createTime}
+                        label="sddsgdfg"
+                        onChange={onTimeRangeChange}
+                        valueLabelDisplay="auto"
+                        aria-labelledby="range-slider"
+                    />
+                </div>
                 <FormControl className={classes.formControl}>
                     <InputLabel id="demo-simple-select-label">Sickness Level</InputLabel>
                     <Select
