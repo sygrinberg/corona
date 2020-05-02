@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import DashboardUpperRow from '../DashboardUpperRow/DashboardUpperRow';
 import DashboardLowerRow from '../DashboardLowerRow/DashboardLowerRow';
+import './Dashboard.scss';
 
 const useStyles = makeStyles(theme => ({
     dashboard: {
@@ -15,9 +16,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default props => {
-    const classes = useStyles();
     return (
-        <div className={classes.dashboard}>
+        <div className="dashboard">
             <DashboardUpperRow />
             <DashboardLowerRow />
         </div>

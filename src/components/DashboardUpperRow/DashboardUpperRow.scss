@@ -1,0 +1,19 @@
+.dashboard-upper-row {
+    display: flex;
+    height: 55%;
+    width: 100%;
+    & > :not(:last-child) {
+        margin-right: 10px;
+    }
+    .alert-box {
+        .alert-title {
+            text-decoration: underline;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .alert-list {
+            padding: 0;
+            font-size: 20px;
+        }
+    }
+}

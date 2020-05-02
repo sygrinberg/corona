@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     width: '350px',
   },
   tabs: {
-    backgroundColor: '#1d115b',
+    backgroundColor: '#000000',
     display: 'flex',
   }
 }));

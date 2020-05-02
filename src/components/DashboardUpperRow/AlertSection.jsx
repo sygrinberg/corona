@@ -25,9 +25,9 @@ const useStyles = makeStyles(theme => ({
 export default props => {
     const classes = useStyles();
     return (
-        <Alert className={classes.alertBox} severity="error">
-            <AlertTitle className={classes.alertTitle}>SYSTEM ALERT</AlertTitle>
-            <ul className={classes.alertList}>
+        <Alert className="alert-box" severity="error">
+            <AlertTitle className="alert-title">SYSTEM ALERT</AlertTitle>
+            <ul className="alert-list">
                 {alerts.map(alert => (
                     <li>
                         {alert}

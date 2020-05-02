@@ -4,6 +4,7 @@ import Graph1 from './Graph1';
 import Graph2 from './Graph2';
 import Graph3 from './Graph3';
 import Graph4 from './Graph4';
+import './DashboardLowerRow.scss';
 // import MiddlGraph from './MiddleGraph';
 // import RightGraph from './RightGraph';
 
@@ -25,7 +26,7 @@ const padding = 20;
 export default props => {
     const classes = useStyles();
     return (
-        <div className={classes.dashboardLowerRow}>
+        <div className="lower-row">
             <Graph1 />
             <Graph2 />
             <Graph3 />

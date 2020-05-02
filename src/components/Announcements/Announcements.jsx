@@ -10,86 +10,22 @@ import Divider from '@material-ui/core/Divider';
 import DashboardController from '../DashboardUpperRow/DashboardController';
 import HeatMap from '../DashboardUpperRow/HeatMap';
 import AlertSection from '../DashboardUpperRow/AlertSection';
-
-const useStyles = makeStyles(theme => ({
-    announcements: {
-      display: 'flex',
-      flexDirection: 'row',
-      padding: '10px',
-      backgroundColor: '#dbdada',
-      height: '100%',
-      width: '100%',
-    //   padding: '10px'
-    },
-    leftSide: {
-        width: '70%',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column'
-    },
-    leftSideTop: {
-        height: '57%',
-        marginBottom: '10px',
-        display: 'flex',
-        flexDirection: 'row'
-    },
-    leftSideBottom: {
-        height: '33%',
-        width: '100%',
-        display: 'flex',
-        padding: '20px',
-        flexDirection: 'row'
-    },
-    text: {
-        width: '80%',
-    },
-    time: {
-        marginLeft: '30px'
-    },
-    messageText: {
-        // height: '100%',
-        with: '100%',
-        fontSize: '20px',
-        padding: '20px',
-        backgroundColor: 'gray'
-    },
-    rightSide: {
-        marginLeft: '10px',
-        width: '30%',
-        display: 'flex',
-        flexDirection: 'column'
-    },
-    prevMessages: {
-        flex: 1,
-        marginTop: '10px',
-        padding: '20px'
-    },
-    prevMessageItem: {
-        backgroundColor: 'gray',
-        padding: '20px',
-        border: '1px solid black',
-        fontSize: '19px',
-        '&:not(last-of-type)': {
-            marginTop: '10px'
-        }
-    }
-}));
+import './Announcements.scss';
 
 export default props => {
-    const classes = useStyles();
     return (
-        <div className={classes.announcements}>
-            <div className={classes.leftSide}>
-                <div className={classes.leftSideTop}>
+        <div className="announcements">
+            <div className="left-side">
+                <div className="left-side-top">
                     <DashboardController componentWidth={30}/>
                     <HeatMap paperWidth={100} />
                 </div>
-                <Paper className={classes.leftSideBottom}>    
-                    <div className={classes.text}>
-                        <h3 className={classes.textTitle}>
+                <Paper className="left-side-bottom">
+                    <div className="text-section">
+                        <h3 className="text-title">
                             Public Announcements Text
                         </h3>
-                        <TextField className={classes.messageText}
+                        <TextField className="message-text"
                             id="standard-multiline-static"
                             rows={8}
                             multiline
@@ -103,13 +39,13 @@ export default props => {
                             ].join('\n')}
                         />
                     </div>
-                    <div className={classes.time}>
-                        <h3 className={classes.textTitle}>
+                    <div className="time-section">
+                        <h3 className="text-title">
                             Timing
                         </h3>
-                        <List component="nav" className={classes.root} aria-label="mailbox folders">
+                        <List component="nav" aria-label="mailbox folders">
                             <ListItem button>
-                                <ListItemText primary="Aprin 25" />
+                                <ListItemText primary="April 25" />
                             </ListItem>
                             <Divider />
                             <ListItem button divider>
@@ -120,23 +56,23 @@ export default props => {
                             </ListItem>
                             <Divider light />
                         </List>
-                        <Button variant="contained" color="primary">
+                        <Button variant="contained" color="primary" className="send-button">
                             Send
                         </Button>
                     </div>
                 </Paper>
             </div>
-            <div className={classes.rightSide}>
+            <div className="right-side">
                 <AlertSection />
-                <Paper className={classes.prevMessages}>
+                <Paper className="prev-messages">
                     <h2>PA - History</h2>
                     <ul>
-                        <li  className={classes.prevMessageItem}>
+                        <li  className="prev-message-item">
                             14.4 20:00 - Age: 65+ 
                             <br/>
                             "Thank you for..."
                         </li>
-                        <li  className={classes.prevMessageItem}>
+                        <li  className="prev-message-item">
                             13.4 20:00 - Age: 0...64
                             <br/>
                             "Thank you for..."
