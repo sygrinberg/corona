@@ -28,6 +28,11 @@ const useStyles = makeStyles(theme => ({
   tabs: {
     backgroundColor: '#000000',
     display: 'flex',
+  },
+  construction: {
+    display: 'flex',
+    justifyContent: 'center',
+    paddingTop: '15%'
   }
 }));
 
@@ -51,11 +56,19 @@ function App() {
             <Tab label="Hospitals" value={4} />
             <Tab label="First Response" value={5} />
             <Tab label="Enforcements" value={6} />
+            <Tab label="Economy" value={7} />
           </Tabs>
       </AppBar>
       {tabValue === 0 ? <Main /> : ''}
       {tabValue === 1 ? <Dashboard /> : ''}
       {tabValue === 2 ? <Announcements /> : ''}
+      {[3, 4, 5, 6, 7].includes(tabValue)
+        ? (
+          <div className={classes.construction}>
+            <h1>This section is under construction</h1>
+          </div>
+        )
+        : ''}
     </div>
   );
 }
