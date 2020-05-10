@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
@@ -10,14 +10,68 @@ import Divider from '@material-ui/core/Divider';
 import DashboardController from '../DashboardUpperRow/DashboardController';
 import HeatMap from '../DashboardUpperRow/HeatMap';
 import AlertSection from '../DashboardUpperRow/AlertSection';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import DateFnsUtils from '@date-io/date-fns';
+import { format } from 'date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+import messagesService from '../../services/Announcements';
 import './Announcements.scss';
 
+const dafeFnsUtils = new DateFnsUtils();
+
 export default props => {
+    const [data, setData] = useState({
+        categoryState: 'cat1',
+        ageRangeState: [18, 40],
+        feverStateRange: [35, 47],
+        timeRangeState: [18, 40],
+        sicknessLevelState: '',
+    });
+
+    const [messages, setMessages] = useState(messagesService.getMessages());
+    const [messageText, setMessageText] = useState([
+        'For tonight 24.7 ac curfew starts for all Tel Aviv',
+        '•    People over 60 cannot leave their houses',
+        '•    Citizans will now be allowed to go furthor then 100 meters away from their home',
+        'Hanging there - Mayor of Tel Aviv'
+    ].join('\n'));
+    const onTextChange = useCallback(event => setMessageText(event.target.value), []);
+    const [date, setDate] = useState(new Date());
+    const onDateChange = useCallback(newDate => setDate(newDate), []);
+    const [time, setTime] = useState(new Date());
+    const onTimeChange = useCallback(newTime => setTime(newTime), []);
+    const [notificationType, setNotificationType] = useState('do_not_repeat');
+    const onNotificationChange = useCallback(newNotificationType => setNotificationType(newNotificationType), []);
+
+    const sendMessage = () => {
+        const message = {
+            date,
+            time,
+            notificationType,
+            text: messageText
+        };
+        const result = messagesService.saveMessage(message);
+
+        if (result) {
+            setDate(new Date());
+            setTime(new Date());
+            setMessageText('');
+            setNotificationType('do_not_repeat');
+            setMessages([...messages, message]);
+        }
+    };
+
     return (
         <div className="announcements">
             <div className="left-side">
                 <div className="left-side-top">
-                    <DashboardController componentWidth={30}/>
+                    <DashboardController componentWidth={30} data={data} setData={setData}/>
                     <HeatMap paperWidth={100} />
                 </div>
                 <Paper className="left-side-bottom">
@@ -30,33 +84,56 @@ export default props => {
                             rows={8}
                             multiline
                             fullWidth
-                            // rows={4}
-                            defaultValue={[
-                                'For tonight 24.7 ac curfew starts for all Tel Aviv',
-                                '•    People over 60 cannot leave their houses',
-                                '•    Citizans will now be allowed to go furthor then 100 meters away from their home',
-                                'Hanging there - Mayor of Tel Aviv'
-                            ].join('\n')}
+                            onChange={onTextChange}
+                            value={messageText}
                         />
                     </div>
                     <div className="time-section">
                         <h3 className="text-title">
                             Timing
                         </h3>
-                        <List component="nav" aria-label="mailbox folders">
-                            <ListItem button>
-                                <ListItemText primary="April 25" />
-                            </ListItem>
-                            <Divider />
-                            <ListItem button divider>
-                                <ListItemText primary="5:30 PM" />
-                            </ListItem>
-                            <ListItem button>
-                                <ListItemText primary="Does not repeat" />
-                            </ListItem>
-                            <Divider light />
-                        </List>
-                        <Button variant="contained" color="primary" className="send-button">
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <div>
+                                <KeyboardDatePicker
+                                    disableToolbar
+                                    // variant="inline"
+                                    format="MM/dd/yyyy"
+                                    margin="normal"
+                                    id="date-picker-inline"
+                                    value={date}
+                                    onChange={onDateChange}
+                                    KeyboardButtonProps={{
+                                        'aria-label': 'change date',
+                                    }}
+                                />
+                            </div>
+                            <div>
+                                <KeyboardTimePicker
+                                    margin="normal"
+                                    id="time-picker"
+                                    value={time}
+                                    onChange={onTimeChange}
+                                    KeyboardButtonProps={{
+                                        'aria-label': 'change time',
+                                    }}
+                                />
+                            </div>
+                        </MuiPickersUtilsProvider>
+                        <FormControl>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={notificationType}
+                                onChange={onNotificationChange}
+                            >
+                                <MenuItem value={'do_not_repeat'}>Do not repeat</MenuItem>
+                                <MenuItem value={'Cat 2'}>Cat 2</MenuItem>
+                                <MenuItem value={'Cat 3'}>Cat 3</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <Button variant="contained" color="primary" className="send-button"
+                            onClick={sendMessage}
+                        >
                             Send
                         </Button>
                     </div>
@@ -67,16 +144,19 @@ export default props => {
                 <Paper className="prev-messages">
                     <h2>PA - History</h2>
                     <ul>
-                        <li  className="prev-message-item">
-                            14.4 20:00 - Age: 65+ 
-                            <br/>
-                            "Thank you for..."
-                        </li>
-                        <li  className="prev-message-item">
-                            13.4 20:00 - Age: 0...64
-                            <br/>
-                            "Thank you for..."
-                        </li>
+                        {messages.map(message => {
+                            return (
+                                <li  className="prev-message-item">
+                                    <div className="prev-message-item-date">
+                                        {format(message.date, dafeFnsUtils.dateFormat)} {format(message.time, dafeFnsUtils.time24hFormat)}
+                                    </div>
+                                    <br/>
+                                    <div className="prev-message-item-text">
+                                        {message.text}
+                                    </div>
+                                </li>
+                            )
+                        })}
                     </ul>
                 </Paper>
             </div>

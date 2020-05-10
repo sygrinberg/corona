@@ -13,7 +13,6 @@ import pandataLogo from './images/pandataLogoWhite.png';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    // display: 'flex'
     height: '100%'
   },
   euroLogo: {
@@ -38,7 +37,7 @@ const useStyles = makeStyles(theme => ({
 
 function App() {
   const classes = useStyles();
-  const [tabValue, setTabValue] = useState(0);
+  const [tabValue, setTabValue] = useState(1);
 
   return (
     <div className={classes.root}>

@@ -27,8 +27,6 @@ const useStyles = makeStyles(theme => ({
 
     const iframeWrapper = useCallback(node => {
         if (node !== null) {
-          console.log('node');
-          console.log(node);
           setHeight(node.getBoundingClientRect().height);
           setWidth(node.getBoundingClientRect().width);
         }

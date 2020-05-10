@@ -27,11 +27,11 @@ const useStyles = makeStyles(theme => ({
 const height = 400;
 const padding = 20;
 
-export default props => {
+export default ({ data, setData, filterString }) => {
     const classes = useStyles();
     return (
         <div className="dashboard-upper-row">
-            <DashboardController height={height} padding={padding}/>
+            <DashboardController height={height} padding={padding} data={data} setData={setData} />
             <HeatMap height={height} padding={padding}/>
             <div className={classes.alertsSection}>
                 <AlertSection />

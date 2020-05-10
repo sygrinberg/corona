@@ -23,14 +23,17 @@ const useStyles = makeStyles(theme => ({
 const height = 400;
 const padding = 20;
 
-export default props => {
+export default ({ data, filterString }) => {
     const classes = useStyles();
+    const {
+        categoryState, ageRangeState, feverStateRange, timeRangeState, sicknessLevelState 
+    } = data;
     return (
         <div className="lower-row">
-            <Graph1 />
-            <Graph2 />
-            <Graph3 />
-            <Graph4 />
+            <Graph1 data={data}/>
+            <Graph2 filterString={filterString}/>
+            <Graph3 data={data}/>
+            <Graph4 data={data}/>
         </div>
     );
 }

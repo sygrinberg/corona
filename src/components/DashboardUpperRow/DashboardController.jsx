@@ -11,8 +11,6 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 
 const useStyles = makeStyles((theme, props) => {
     return ({
@@ -20,21 +18,17 @@ const useStyles = makeStyles((theme, props) => {
             width: props => `${props.componentWidth}%`,
         },
         formControl: {
-            minWidth: 140
+            minWidth: 140,
+            marginTop: '15px'
         },
         sliderContainer: {
             display: 'flex',
             justifyContent: 'space-between'
-            // marginBottom: '-10px'
         },
-        // sliderTypography: {
-        //     marginBottom: '-10px'
-        // },
         slider: {
             width: '70%'
         },
         paper: {
-            // margin: '5px',
             height: '100%',
             display: 'flex',
             flexDirection: 'column',
@@ -48,34 +42,54 @@ const createTime = value => {
     return `${Math.floor(value)}:${minutes || '00'}`
 }
 
-export default ({ height, padding, componentWidth = 16 }) => {
+export default ({ height, padding, componentWidth = 16, data, setData }) => {
     const classes = useStyles({ height, padding, componentWidth });
 
-    const [categoryState, setCategoryState] = useState('cat1');
-    const [ageRangeState, setAgeRangeState] = useState([18, 40]);
-    const [timeRangeState, setTimeRangeState] = useState([18, 40]);
-    const [feverStateRange, setFeverStateRange] = useState([35, 47]);
+    const { categoryState, ageRangeState, timeRangeState, feverStateRange, sicknessLevelState, diagnosedState } = data;
     
-    const [sicknessLevelState, setSicknessLevelState] = useState('');
 
     const onCategoryChange = useCallback((event => {
-        setCategoryState(event.target.value);
+        setData({
+            ...data,
+            categoryState: event.target.value
+        });
     }), []);
 
     const onAgeRangeChange = useCallback(((event, newValue) => {
-        setAgeRangeState(newValue);
+        setData({
+            ...data,
+            ageRangeState: newValue
+        });
     }), []);
 
     const onFeverRangeChange = useCallback(((event, newValue) => {
-        setFeverStateRange(newValue);
+        setData({
+            ...data,
+            feverStateRange: newValue
+        });
     }), []);
 
     const onTimeRangeChange = useCallback(((event, newValue) => {
-        setTimeRangeState(newValue);
+        setData({
+            ...data,
+            timeRangeState: newValue
+        });
     }), []);
 
     const onSicknessLevelChange = useCallback(((event) => {
-        setSicknessLevelState(event.target.value);
+        setData({
+            ...data,
+            sicknessLevelState: event.target.value
+        });
+    }), []);
+
+    const onDiagnosedChange = useCallback(((event, newValue) => {
+        console.log('newValue')
+        console.log(newValue)
+        setData({
+            ...data,
+        diagnosedState: newValue === 'true' ? true : false
+        });
     }), []);
 
     return (
@@ -145,7 +159,14 @@ export default ({ height, padding, componentWidth = 16 }) => {
                         <MenuItem value={'good'}>Good</MenuItem>
                         <MenuItem value={'bad'}>Bad</MenuItem>
                     </Select>
-            </FormControl>
+                </FormControl>
+                <FormControl component="fieldset" className={classes.formControl}>
+                    <FormLabel component="legend">Diagnosed</FormLabel>
+                    <RadioGroup aria-label="category" name="category" value={diagnosedState ? true : false} onChange={onDiagnosedChange}>
+                        <FormControlLabel value={true} control={<Radio />} label="True" />
+                        <FormControlLabel value={false} control={<Radio />} label="False" />
+                    </RadioGroup>
+                </FormControl>
             </Paper>
         </div>
     );
